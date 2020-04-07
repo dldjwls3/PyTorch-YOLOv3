@@ -19,7 +19,6 @@ import torch
 from torch.utils.data import DataLoader
 from torchvision import datasets
 from torchvision import transforms
-from torch.autograd import Variable
 import torch.optim as optim
 
 if __name__ == "__main__":
@@ -99,8 +98,8 @@ if __name__ == "__main__":
         for batch_i, (_, imgs, targets) in enumerate(dataloader):
             batches_done = len(dataloader) * epoch + batch_i
 
-            imgs = Variable(imgs.to(device))
-            targets = Variable(targets.to(device), requires_grad=False)
+            imgs = imgs.to(device)
+            targets = targets.to(device, requires_grad=False)
 
             loss, outputs = model(imgs, targets)
             loss.backward()
